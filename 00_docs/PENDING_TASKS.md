@@ -22,10 +22,10 @@ This document tracks the development tasks for the WalletWiz backend. Developmen
 - [x] Create JWT validation dependency `get_current_user` in `app/api/dependencies.py`
 
 ### 4. Transactions & Analytics
-- [ ] Implement transaction CRUD logic in `app/services/transaction.py`
-- [ ] Create transaction endpoints (GET/POST/PUT/DELETE) in `app/api/v1/transactions.py`
-- [ ] Implement analytics aggregation pipelines in `app/services/analytics.py`
-- [ ] Create analytics dashboard endpoints in `app/api/v1/analytics.py`
+- [x] Implement transaction CRUD logic in `app/services/transaction.py`
+- [x] Create transaction endpoints (GET/POST/PUT/DELETE) in `app/api/v1/transactions.py`
+- [x] Implement analytics aggregation pipelines in `app/services/analytics.py`
+- [x] Create analytics dashboard endpoints in `app/api/v1/analytics.py`
 
 ### 5. Conversational LLM Agent & Tools Integration
 - [ ] Initialize Gemini 1.5 Flash client & LangChain integration in `app/services/llm_provider.py`
