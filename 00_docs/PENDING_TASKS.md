@@ -28,11 +28,11 @@ This document tracks the development tasks for the WalletWiz backend. Developmen
 - [x] Create analytics dashboard endpoints in `app/api/v1/analytics.py`
 
 ### 5. Conversational LLM Agent & Tools Integration
-- [ ] Initialize Gemini 1.5 Flash client & LangChain integration in `app/services/llm_provider.py`
-- [ ] Define agent tool logic (dynamic user binding for `log_transaction` and `query_database`) in `app/services/query_processor.py`
-- [ ] Construct LLM system instructions and prompt templates in `app/services/prompt_builder.py`
-- [ ] Implement conversational Q&A endpoint (`POST /chat`) in `app/api/v1/query.py`
-- [ ] Implement rate limiting (20 RPM) for LLM-related endpoints in API layer
+- [x] Initialize Gemini 1.5 Flash client & LangChain integration in `app/services/llm_provider.py`
+- [x] Define agent tool logic (dynamic user binding for `log_transaction` and `query_database`) in `app/services/query_processor.py`
+- [x] Construct LLM system instructions and prompt templates in `app/services/prompt_builder.py`
+- [x] Implement conversational Q&A endpoint (`POST /chat`) in `app/api/v1/query.py`
+- [x] Implement rate limiting (20 RPM) for LLM-related endpoints in API layer
 
 ### 6. Testing & Utility Scripts
 - [ ] Implement mock data generator in `app/scripts/seed_mock_data.py`

@@ -1,9 +1,9 @@
 from fastapi import Depends
 from fastapi.security import OAuth2PasswordBearer
 from beanie import PydanticObjectId
-from app.core.exceptions import UnauthorizedException
-from app.core.security import decode_access_token
-from app.models.db_user import User
+from core.exceptions import UnauthorizedException
+from core.security import decode_access_token
+from models.db_user import User
 
 # Define the OAuth2 security scheme pointing to our login route
 # auto_error=False allows us to manually raise custom exceptions

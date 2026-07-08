@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, status
-from app.models.request import UserRegisterRequest, UserLoginRequest, GoogleAuthRequest
-from app.models.response import UserRegisterResponse, TokenResponse, GoogleAuthResponse
-from app.services import auth as auth_service
+from models.request import UserRegisterRequest, UserLoginRequest, GoogleAuthRequest
+from models.response import UserRegisterResponse, TokenResponse, GoogleAuthResponse
+from services import auth as auth_service
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 

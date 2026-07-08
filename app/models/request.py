@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import List, Optional
 from pydantic import BaseModel, EmailStr, Field
-from app.models.db_transaction import TransactionCategory, PaymentMethod
+from models.db_transaction import TransactionCategory, PaymentMethod
 
 class UserRegisterRequest(BaseModel):
     email: EmailStr

@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends, Query, status
 from typing import Optional
-from app.api.dependencies import get_current_user
-from app.models.db_user import User
-from app.models.request import TransactionCreateRequest, TransactionUpdateRequest
-from app.models.response import TransactionResponse, TransactionListResponse, PaginationMetadata
-from app.services import transaction as transaction_service
+from api.dependencies import get_current_user
+from models.db_user import User
+from models.request import TransactionCreateRequest, TransactionUpdateRequest
+from models.response import TransactionResponse, TransactionListResponse, PaginationMetadata
+from services import transaction as transaction_service
 
 router = APIRouter(prefix="/transactions", tags=["Transactions"])
 

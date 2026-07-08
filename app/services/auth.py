@@ -1,11 +1,11 @@
 from datetime import datetime
 from google.oauth2 import id_token
 from google.auth.transport import requests as google_requests
-from app.core.config import settings
-from app.core.exceptions import UserAlreadyExistsException, InvalidCredentialsException
-from app.core.security import hash_password, verify_password, create_access_token
-from app.models.db_user import User
-from app.models.request import UserRegisterRequest, UserLoginRequest, GoogleAuthRequest
+from core.config import settings
+from core.exceptions import UserAlreadyExistsException, InvalidCredentialsException
+from core.security import hash_password, verify_password, create_access_token
+from models.db_user import User
+from models.request import UserRegisterRequest, UserLoginRequest, GoogleAuthRequest
 
 async def register_user(request: UserRegisterRequest) -> User:
     """

@@ -25,8 +25,8 @@ class LLMMetadata(BaseModel):
 class Transaction(Document):
     user_id: Indexed(PydanticObjectId)
     amount: float
-    category: Indexed(TransactionCategory)
-    payment_method: Indexed(PaymentMethod)
+    category: TransactionCategory
+    payment_method: PaymentMethod
     merchant: Optional[str] = ""
     description: Optional[str] = ""
     transaction_date: Indexed(datetime)
@@ -36,3 +36,7 @@ class Transaction(Document):
 
     class Settings:
         name = "transactions"
+        indexes = [
+            "category",
+            "payment_method"
+        ]

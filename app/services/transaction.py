@@ -1,9 +1,9 @@
 from datetime import datetime, time
 from typing import List, Optional, Tuple
 from beanie import PydanticObjectId
-from app.core.exceptions import TransactionNotFoundException, WalletWizException
-from app.models.db_transaction import Transaction
-from app.models.request import TransactionCreateRequest, TransactionUpdateRequest
+from core.exceptions import TransactionNotFoundException, WalletWizException
+from models.db_transaction import Transaction
+from models.request import TransactionCreateRequest, TransactionUpdateRequest
 
 async def create_transaction(user_id: PydanticObjectId, request: TransactionCreateRequest) -> Transaction:
     """

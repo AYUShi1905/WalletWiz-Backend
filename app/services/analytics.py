@@ -1,8 +1,8 @@
 from datetime import datetime, timedelta, time
 from typing import Optional, Tuple
 from beanie import PydanticObjectId
-from app.models.db_transaction import Transaction
-from app.models.response import (
+from models.db_transaction import Transaction
+from models.response import (
     DashboardResponse,
     CategorySpending,
     PaymentMethodSpending,
@@ -147,7 +147,7 @@ async def get_dashboard_data(user_id: PydanticObjectId, timeframe: Optional[str]
     ).sort(-Transaction.transaction_date).limit(5).to_list()
 
     # Import and map recent transactions to Response schemas
-    from app.api.v1.transactions import map_to_response
+    from api.v1.transactions import map_to_response
     mapped_recent = [map_to_response(tx) for tx in recent_transactions]
 
     return DashboardResponse(
