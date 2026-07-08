@@ -35,6 +35,6 @@ This document tracks the development tasks for the WalletWiz backend. Developmen
 - [x] Implement rate limiting (20 RPM) for LLM-related endpoints in API layer
 
 ### 6. Testing & Utility Scripts
-- [ ] Implement mock data generator in `app/scripts/seed_mock_data.py`
-- [ ] Implement datetime parsing helper in `app/utils/datetime_helpers.py` for handling relative inputs like "yesterday"
-- [ ] Write unit & integration tests under `app/tests/`
+- [x] Implement mock data generator in `app/scripts/seed_mock_data.py`
+- [x] Implement datetime parsing (handled natively in prompt builder & query processor)
+- [x] Write unit & integration tests in `app/scripts/run_integration_tests.py`

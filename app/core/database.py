@@ -1,4 +1,4 @@
-from motor.motor_asyncio import AsyncIOMotorClient
+from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorCollection
 from beanie import init_beanie
 from core.config import settings
 from models.db_user import User
@@ -9,6 +9,17 @@ from models.db_transaction import Transaction
 # where append_metadata was removed from the MongoDB client.
 if not hasattr(AsyncIOMotorClient, "append_metadata"):
     AsyncIOMotorClient.append_metadata = lambda *args, **kwargs: None
+
+# Monkeypatch AsyncIOMotorCollection.aggregate to be awaitable
+# In Motor v3.x, collection.aggregate(...) is synchronous, but Beanie v2.1.0
+# expects it to be asynchronous and awaits it, causing a TypeError.
+# Wrapping it in an async function resolves this incompatibility.
+original_aggregate = AsyncIOMotorCollection.aggregate
+
+async def async_aggregate(self, *args, **kwargs):
+    return original_aggregate(self, *args, **kwargs)
+
+AsyncIOMotorCollection.aggregate = async_aggregate
 
 async def init_db():
     """
