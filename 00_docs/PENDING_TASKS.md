@@ -16,8 +16,8 @@ This document tracks the development tasks for the WalletWiz backend. Developmen
 - [x] Implement Pydantic response models in `app/models/response.py`
 
 ### 3. Authentication & Security
-- [ ] Implement security utilities (password hashing, JWT token generation & parsing) in `app/core/security.py`
-- [ ] Create user authentication service logic in `app/services/auth.py`
+- [x] Implement security utilities (password hashing, JWT token generation & parsing) in `app/core/security.py`
+- [x] Create user authentication service logic in `app/services/auth.py`
 - [ ] Implement registration, login, and Google OAuth flow routes in `app/api/v1/auth.py`
 - [ ] Create JWT validation dependency `get_current_user` in `app/api/dependencies.py`
 
