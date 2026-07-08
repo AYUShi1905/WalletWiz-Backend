@@ -5,15 +5,15 @@ This document tracks the development tasks for the WalletWiz backend. Developmen
 ## 📋 Road Map & Status
 
 ### 1. Environment & Database Configuration
-- [ ] Set up environment variables template in `app/.example.env` and configuration loader in `app/core/config.py`
-- [ ] Initialize Beanie ODM and establish connection to MongoDB Atlas in `app/core/database.py`
-- [ ] Set up structured logging in `app/utils/logger.py` and exception handlers in `app/core/exceptions.py`
+- [x] Set up environment variables template in `app/.example.env` and configuration loader in `app/core/config.py`
+- [x] Initialize Beanie ODM and establish connection to MongoDB Atlas in `app/core/database.py`
+- [x] Set up structured logging in `app/utils/logger.py` and exception handlers in `app/core/exceptions.py`
 
 ### 2. Core Models & Schema Definitions
-- [ ] Define Beanie DB User document model in `app/models/db_user.py`
-- [ ] Define Beanie DB Transaction document model in `app/models/db_transaction.py`
-- [ ] Implement Pydantic request models in `app/models/request.py`
-- [ ] Implement Pydantic response models in `app/models/response.py`
+- [x] Define Beanie DB User document model in `app/models/db_user.py`
+- [x] Define Beanie DB Transaction document model in `app/models/db_transaction.py`
+- [x] Implement Pydantic request models in `app/models/request.py`
+- [x] Implement Pydantic response models in `app/models/response.py`
 
 ### 3. Authentication & Security
 - [ ] Implement security utilities (password hashing, JWT token generation & parsing) in `app/core/security.py`
