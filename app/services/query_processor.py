@@ -10,6 +10,20 @@ from models.response import ChatResponse
 from services.llm_provider import get_llm
 from services.prompt_builder import get_system_prompt
 
+def _get_content_text(content) -> str:
+    if isinstance(content, str):
+        return content
+    if isinstance(content, list):
+        text_parts = []
+        for part in content:
+            if isinstance(part, str):
+                text_parts.append(part)
+            elif isinstance(part, dict):
+                if part.get("type") == "text" and "text" in part:
+                    text_parts.append(part["text"])
+        return "".join(text_parts)
+    return str(content)
+
 def create_agent_tools(user_id: PydanticObjectId, raw_input_text: str = ""):
     """
     Creates custom tools bound securely to the authenticated user's ID.
@@ -225,12 +239,12 @@ async def process_chat(
 
                 # Second turn: Gemini synthesizes the final response incorporating the tool outputs
                 final_response = await llm_with_tools.ainvoke(messages)
-                output_text = final_response.content
+                output_text = _get_content_text(final_response.content)
             else:
                 output_text = "Error: Triggered tool could not be executed."
         else:
             # No tool was triggered; direct conversational response
-            output_text = response.content
+            output_text = _get_content_text(response.content)
 
         return ChatResponse(
             response=output_text,
