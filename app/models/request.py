@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import List, Optional
 from pydantic import BaseModel, EmailStr, Field
-from models.db_transaction import TransactionCategory, PaymentMethod
+from models.db_transaction import TransactionCategory, PaymentMethod, LLMMetadata
 
 class UserRegisterRequest(BaseModel):
     email: EmailStr
@@ -23,6 +23,7 @@ class TransactionCreateRequest(BaseModel):
     transaction_date: datetime = Field(default_factory=datetime.utcnow)
     description: Optional[str] = ""
     source_type: str = "manual"  # "manual" | "llm"
+    llm_metadata: Optional[LLMMetadata] = None
 
 class TransactionUpdateRequest(BaseModel):
     amount: Optional[float] = Field(None, gt=0)

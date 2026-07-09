@@ -17,7 +17,8 @@ async def create_transaction(user_id: PydanticObjectId, request: TransactionCrea
         merchant=request.merchant,
         description=request.description,
         transaction_date=request.transaction_date,
-        source_type=request.source_type
+        source_type=request.source_type,
+        llm_metadata=request.llm_metadata
     )
     await new_transaction.insert()
     return new_transaction

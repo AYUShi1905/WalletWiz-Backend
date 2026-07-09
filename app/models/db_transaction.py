@@ -19,7 +19,7 @@ class PaymentMethod(str, Enum):
     UPI = "UPI"
 
 class LLMMetadata(BaseModel):
-    confidence_score: float
+    confidence_score: Optional[float] = 1.0
     raw_input_text: str
 
 class Transaction(Document):

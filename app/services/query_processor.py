@@ -10,7 +10,7 @@ from models.response import ChatResponse
 from services.llm_provider import get_llm
 from services.prompt_builder import get_system_prompt
 
-def create_agent_tools(user_id: PydanticObjectId):
+def create_agent_tools(user_id: PydanticObjectId, raw_input_text: str = ""):
     """
     Creates custom tools bound securely to the authenticated user's ID.
     This guarantees data isolation between different users.
@@ -39,7 +39,7 @@ def create_agent_tools(user_id: PydanticObjectId):
         """
         from services.transaction import create_transaction
         from models.request import TransactionCreateRequest
-        from models.db_transaction import TransactionCategory, PaymentMethod
+        from models.db_transaction import TransactionCategory, PaymentMethod, LLMMetadata
 
         # Resolve transaction date
         tx_date = datetime.utcnow()
@@ -70,7 +70,8 @@ def create_agent_tools(user_id: PydanticObjectId):
             merchant=merchant or "",
             transaction_date=tx_date,
             description=description or "",
-            source_type="llm"
+            source_type="llm",
+            llm_metadata=LLMMetadata(raw_input_text=raw_input_text) if raw_input_text else None
         )
 
         try:
@@ -169,7 +170,7 @@ async def process_chat(
     """
     # 1. Initialize the LLM (gemini-2.5-flash) and bind our tools
     llm = get_llm(temperature=0.0)
-    tools = create_agent_tools(user_id)
+    tools = create_agent_tools(user_id, raw_input_text=message)
     llm_with_tools = llm.bind_tools(tools)
 
     # 2. Setup message history starting with system instruction
