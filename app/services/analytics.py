@@ -15,7 +15,8 @@ def get_timeframe_range(timeframe: Optional[str]) -> Tuple[datetime, datetime]:
     for a given timeframe query.
     """
     now = datetime.utcnow()
-    end_date = now
+    # Use end of the day in UTC to capture all transactions recorded on the current day
+    end_date = datetime.combine(now.date(), time.max)
 
     if timeframe == "last-30-days":
         start_date = datetime.combine(now.date() - timedelta(days=30), time.min)
@@ -53,10 +54,8 @@ async def get_dashboard_data(user_id: PydanticObjectId, timeframe: Optional[str]
     result_total = await Transaction.aggregate(pipeline_total).to_list()
     total_spent = result_total[0]["total_spent"] if result_total else 0.0
 
-    # Calculate daily average
-    num_days = (end_date - start_date).days
-    if num_days <= 0:
-        num_days = 1
+    # Calculate daily average based on actual calendar days in the timeframe
+    num_days = (end_date.date() - start_date.date()).days + 1
     daily_average = total_spent / num_days
 
     # 2. Pipeline for Category Breakdown
@@ -133,13 +132,21 @@ async def get_dashboard_data(user_id: PydanticObjectId, timeframe: Optional[str]
         {"$sort": {"_id": 1}}
     ]
     result_trend = await Transaction.aggregate(pipeline_trend).to_list()
-    daily_trend = [
-        DailySpending(
-            date=str(item["_id"]),
-            amount=round(item["amount"], 2)
+    
+    # Fill in zero-spending days for a continuous trend line
+    trend_dict = {item["_id"]: item["amount"] for item in result_trend}
+    daily_trend = []
+    current_date = start_date.date()
+    while current_date <= end_date.date():
+        date_str = current_date.strftime("%Y-%m-%d")
+        amount = trend_dict.get(date_str, 0.0)
+        daily_trend.append(
+            DailySpending(
+                date=date_str,
+                amount=round(amount, 2)
+            )
         )
-        for item in result_trend
-    ]
+        current_date += timedelta(days=1)
 
     # 5. Fetch Recent Transactions (Limit 5)
     recent_transactions = await Transaction.find(
