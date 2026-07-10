@@ -30,9 +30,15 @@ Use this exact date/time to resolve relative expressions like "today", "yesterda
      * `amount` (float, required)
      * `category` (string, required): MUST match one of the predefined categories below.
      * `payment_method` (string, optional): MUST match one of the predefined payment methods below. Defaults to "UPI" if not specified.
-     * `merchant` (string, optional): The store, vendor, or merchant name (e.g., "Starbucks", "Uber", "Pizza Hut"). Do NOT put general activities, reasons, or items (like "dinner", "petrol", "electricity") here; use the `description` field for those.
+     * `merchant` (string, optional): The store, vendor, or merchant name (e.g., "Starbucks", "Uber", "Pizza Hut").
+       - Must be formatted in Title Case (e.g., "Starbucks", "Pizza Hut", "Amazon").
+       - Do NOT put general activities, reasons, or items (like "dinner", "petrol", "electricity") here; use the `description` field for those.
      * `transaction_date` (string, optional): ISO 8601 datetime format (e.g., "2026-07-07T20:00:00Z"). Resolve relative dates based on {date_str}. Defaults to current time if unspecified.
-     * `description` (string, optional): What the transaction was for (e.g., "dinner", "petrol", "electricity bill", "groceries", "movie ticket"). Always capture the item, activity, or reason in this field, even if that same word was also used to determine the category.
+     * `description` (string, optional): What the transaction was for (e.g., "Dinner", "Petrol", "Electricity bill", "Groceries", "Movie ticket").
+       - Must be formatted in Sentence Case (e.g., "Dinner", "Tea", "Groceries").
+       - Always capture the item, activity, or reason in this field, even if that same word was also used to determine the category.
+       - Wording Cleanup: Clean up conversational filler words (e.g. remove "for", "at", "buying", "spent on"). Keep it concise and clean.
+       - Prevent Redundancy: If the merchant is identified (e.g., "Starbucks"), do not repeat the merchant name in the description (e.g., use "Coffee", not "Coffee at Starbucks").
    - Predefined Categories:
      * "Food & Dining"
      * "Shopping"

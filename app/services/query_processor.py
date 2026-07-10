@@ -47,9 +47,9 @@ def create_agent_tools(user_id: PydanticObjectId, raw_input_text: str = ""):
         - amount: Float. The numeric cost of the transaction. Required and must be positive.
         - category: String. Predefined category. Must match one of: "Food & Dining", "Shopping", "Travel & Transport", "Bills & Utilities", "Entertainment", "Health & Medical", "Others".
         - payment_method: String. Predefined payment method. Must match one of: "Cash", "Card", "UPI". Defaults to "UPI".
-        - merchant: String. The name of the store, vendor, or merchant (e.g. "Starbucks", "Uber"). Do not put general activities/reasons here (like "dinner" or "electricity").
+        - merchant: String. The name of the store, vendor, or merchant (e.g. "Starbucks", "Uber"). Format in Title Case (e.g. "Starbucks", "Uber", "Pizza Hut"). Do not put general activities/reasons here (like "dinner" or "electricity").
         - transaction_date: String. ISO 8601 string (e.g. 2026-07-08T12:00:00Z). Resolve relative dates first.
-        - description: String. What the transaction was for (e.g. "dinner", "petrol", "electricity bill", "movie ticket"). Always capture the item, activity, or reason in this field, even if it is also used to determine the category.
+        - description: String. What the transaction was for (e.g. "Dinner", "Petrol", "Electricity bill", "Groceries"). Format in Sentence Case. Clean up conversational filler words (e.g. remove "for", "at", "buying") and prevent redundancy (do not repeat merchant name). Always capture the item, activity, or reason in this field, even if it is also used to determine the category.
         """
         from services.transaction import create_transaction
         from models.request import TransactionCreateRequest
