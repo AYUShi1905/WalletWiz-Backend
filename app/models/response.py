@@ -62,3 +62,9 @@ class DashboardResponse(BaseModel):
     by_payment_method: List[PaymentMethodSpending]
     daily_trend: List[DailySpending]
     recent_transactions: List[TransactionResponse]
+
+class UserProfileResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    id: str
+    email: str
+    first_name: str
