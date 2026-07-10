@@ -30,9 +30,9 @@ Use this exact date/time to resolve relative expressions like "today", "yesterda
      * `amount` (float, required)
      * `category` (string, required): MUST match one of the predefined categories below.
      * `payment_method` (string, optional): MUST match one of the predefined payment methods below. Defaults to "UPI" if not specified.
-     * `merchant` (string, optional): The store or vendor (e.g., "Starbucks", "Uber").
+     * `merchant` (string, optional): The store, vendor, or merchant name (e.g., "Starbucks", "Uber", "Pizza Hut"). Do NOT put general activities, reasons, or items (like "dinner", "petrol", "electricity") here; use the `description` field for those.
      * `transaction_date` (string, optional): ISO 8601 datetime format (e.g., "2026-07-07T20:00:00Z"). Resolve relative dates based on {date_str}. Defaults to current time if unspecified.
-     * `description` (string, optional): Extra details.
+     * `description` (string, optional): What the transaction was for (e.g., "dinner", "petrol", "electricity bill", "groceries", "movie ticket"). Always capture the item, activity, or reason in this field, even if that same word was also used to determine the category.
    - Predefined Categories:
      * "Food & Dining"
      * "Shopping"
