@@ -47,4 +47,8 @@ async def get_me(current_user: User = Depends(get_current_user)):
     """
     Returns the authenticated user's profile details.
     """
-    return current_user
+    return UserProfileResponse(
+        id=str(current_user.id),
+        email=current_user.email,
+        first_name=current_user.first_name
+    )
